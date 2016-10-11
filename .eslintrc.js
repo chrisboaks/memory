@@ -18,9 +18,10 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'indent': [2, 2, {"SwitchCase": 1}],
+    'indent': [2, 2, {'SwitchCase': 1}],
     'linebreak-style': [2, 'unix'],
     'semi': [2, 'always'],
-    'strict': 0
+    'strict': 0,
+    'space-before-function-paren': [2, 'never']
   }
 }
