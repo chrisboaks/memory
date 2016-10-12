@@ -2,9 +2,11 @@
   <div class="game">
     <card
       v-for="(card, index) in cards"
-      v-bind:card="card"
       v-bind:index="index"
-      v-on:reveal="handleReveal">
+      v-bind:isVisible="card.isVisible"
+      v-bind:isMatched="card.isMatched"
+      v-bind:symbol="card.symbol"
+      v-on:touch="handleTouch">
     </card>
   </div>
 </template>
@@ -12,7 +14,7 @@
 <script>
   import Game from '../js/game';
   import Card from './Card';
-  const game = new Game();
+  const model = new Game();
 
   export default {
     components: {
@@ -20,12 +22,12 @@
     },
     data() {
       return {
-        cards: game.cards
+        cards: model.cards
       };
     },
     methods: {
-      handleReveal(index) {
-        console.log('revealing', index);
+      handleTouch(index) {
+        model.touchCard(index);
       }
     }
   };

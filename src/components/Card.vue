@@ -1,57 +1,59 @@
 <template>
-  <div class="card" v-on:click="reveal">
-    <span v-show="isVisible" class="front">{{ card.symbol }}</span>
-    <span v-show="!isVisible" class="back">?</span>
+  <div class="card-container">
+    <div
+      class="card"
+      v-on:click="touch"
+      v-bind:class="{visible: isVisible, matched: isMatched}">
+      {{ isVisible ? symbol : '?' }}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['symbol', 'onClick', 'card', 'index'],
-  data() {
-    return {
-      isVisible: false,
-      isMatched: false
-      // symbol: ''
-      // index: 0
-    };
-  },
+  props: ['index', 'isVisible', 'isMatched', 'symbol'],
   methods: {
-    reveal() {
-      this.flip();
-      this.$emit('reveal', this.index);
-    },
-    flip() {
-      this.isVisible = !this.isVisible;
-      console.log('card hey', this.index);
-    },
-    test2() {
-      this.isVisible = !this.isVisible;
-      console.log(this.isVisible);
+    touch() {
+      this.$emit('touch', this.index);
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-.card {
-  height: 1.1em;
-  width: 1.1em;
-  font-size: 10em;
-  line-height: 1em;
-  text-align: center;
-  border: 1px solid #333;
-  border-radius: 5px;
-  background-color: green;
-  display: inline-block;
 
-  .front {
+<style lang="scss">
+$card-size: 150px;
+$font-size: 140px;
+
+.card-container {
+  margin: 10px;
+  display: inline-block;
+  height: $card-size;
+  width: $card-size;
+
+  .visible {
     background-color: white;
   }
 
-  .back {
-
+  .matched {
+    color: #777;
   }
+
+  .back {
+    background-color: green;
+  }
+
+}
+
+.card {
+  box-sizing: border-box;
+  height: $card-size;
+  width: $card-size;
+  font-size: 150px;
+  line-height: $card-size;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: green;
+  overflow: hidden;
 }
 </style>

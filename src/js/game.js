@@ -7,9 +7,10 @@ const SECONDS = 1000;
 export default class Game {
   constructor() {
     this.cards = createCards();
+    this.isUpdating = false;
   }
 
-  get isVisible() {
+  get visibleCards() {
     return this.cards.filter(c => c.isVisible && !c.isMatched);
   }
 
@@ -17,36 +18,40 @@ export default class Game {
     return this.cards.every(card => card.isMatched);
   }
 
-  flip(i) {
-    console.log('flipping', i);
+  touchCard(i) {
+    if (this.isUpdating) return;
+
     const card = this.cards[i];
-    card.isVisible = !card.isVisible;
+    card.flip();
     this.update();
   }
 
   update() {
-    const [cardA, cardB] = this.isVisible;
+    const [cardA, cardB] = this.visibleCards;
     if (!cardB) { return; }
 
+    this.isUpdating = true;
     if (cardA.symbol === cardB.symbol) {
-      handleMatched(cardA, cardB);
+      handleMatched(cardA, cardB, this);
     } else {
-      handleUnmatched(cardA, cardB);
+      handleUnmatched(cardA, cardB, this);
     }
   }
 }
 
-function handleMatched(cardA, cardB) {
+function handleMatched(cardA, cardB, game) {
   setTimeout(() => {
     cardA.isMatched = true;
     cardB.isMatched = true;
+    game.isUpdating = false;
   }, 0.5 * SECONDS);
 }
 
-function handleUnmatched(cardA, cardB) {
+function handleUnmatched(cardA, cardB, game) {
   setTimeout(() => {
     cardA.flip();
     cardB.flip();
+    game.isUpdating = false;
   }, 1 * SECONDS);
 }
 
