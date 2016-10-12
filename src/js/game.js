@@ -18,10 +18,10 @@ export default class Game {
     return this.cards.every(card => card.isMatched);
   }
 
-  touchCard(i) {
+  touchCard(id) {
     if (this.isUpdating) return;
 
-    const card = this.cards[i];
+    const card = this.cards.find(c => c.id === id);
     card.flip();
     this.update();
   }
@@ -56,8 +56,8 @@ function handleUnmatched(cardA, cardB, game) {
 }
 
 function createCards() {
-  const cards = symbols.reduce((cards, img) =>
-    cards.concat([new Card(img), new Card(img)])
+  const cards = symbols.reduce((cards, img, i) =>
+    cards.concat([new Card(img, 2 * i), new Card(img, 2 * i + 1)])
   , []);
   return shuffle(cards);
 }

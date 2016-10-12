@@ -1,8 +1,8 @@
 <template>
   <div class="game">
     <card
-      v-for="(card, index) in cards"
-      v-bind:index="index"
+      v-for="card in cards"
+      v-bind:id="card.id"
       v-bind:isVisible="card.isVisible"
       v-bind:isMatched="card.isMatched"
       v-bind:symbol="card.symbol"

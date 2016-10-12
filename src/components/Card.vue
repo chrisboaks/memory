@@ -11,10 +11,10 @@
 
 <script>
 export default {
-  props: ['index', 'isVisible', 'isMatched', 'symbol'],
+  props: ['id', 'isVisible', 'isMatched', 'symbol'],
   methods: {
     touch() {
-      this.$emit('touch', this.index);
+      this.$emit('touch', this.id);
     }
   }
 };
@@ -31,18 +31,6 @@ $font-size: 140px;
   height: $card-size;
   width: $card-size;
 
-  .visible {
-    background-color: white;
-  }
-
-  .matched {
-    color: #777;
-  }
-
-  .back {
-    background-color: green;
-  }
-
 }
 
 .card {
@@ -55,5 +43,16 @@ $font-size: 140px;
   border-radius: 5px;
   background-color: green;
   overflow: hidden;
+  cursor: pointer;
+
+  &.visible {
+    background-color: white;
+    cursor: default;
+  }
+
+  &.matched {
+    color: #777;
+    cursor: default;
+  }
 }
 </style>
