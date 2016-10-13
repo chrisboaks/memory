@@ -1,11 +1,20 @@
 <template>
-  <div class="card-container">
+  <div
+    class="card-container"
+    v-bind:class="{visible: isVisible}">
+
     <div
       class="card"
       v-on:click="touch"
-      v-bind:class="{visible: isVisible, matched: isMatched}">
-      {{ isVisible ? symbol : '?' }}
+      v-bind:class="{matched: isMatched}">
+      <div class="front">
+        {{ symbol }}
+      </div>
+      <div class="back">
+        ?
+      </div>
     </div>
+
   </div>
 
 </template>
@@ -26,28 +35,53 @@ export default {
 $card-size: 200px;
 $font-size: 170px;
 
+.card-container {
+  perspective: 1000px;
+  margin: 15px;
+
+  &.visible .card {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-container, .front, .back {
+  width: $card-size;
+  height: $card-size;
+  font-size: $font-size;
+}
+
 .card {
   box-sizing: border-box;
-  height: $card-size;
-  width: $card-size;
-  font-size: $font-size;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
   line-height: $card-size;
-  border: 5px solid #333;
-  border-radius: 5px;
-  background-color: green;
-  overflow: hidden;
-  cursor: pointer;
-  margin-bottom: 15px;
-
-  &.visible {
-    background-color: white;
-    border: 1px solid #333;
-    cursor: default;
-  }
-
   &.matched {
     color: #777;
-    cursor: default;
   }
+}
+
+.front, .back {
+  border-radius: 10px;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(180deg);
+  cursor: default;
+  left: -9px;
+  border: 5px solid #666;
+  background-color: white;
+}
+
+.back {
+  background-color: dodgerblue;
+  transform: rotateY(0deg);
+  cursor: pointer;
+  border: 5px solid #333;
 }
 </style>
