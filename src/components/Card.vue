@@ -7,6 +7,7 @@
       {{ isVisible ? symbol : '?' }}
     </div>
   </div>
+
 </template>
 
 <script>
@@ -22,31 +23,25 @@ export default {
 
 
 <style lang="scss">
-$card-size: 150px;
-$font-size: 140px;
-
-.card-container {
-  margin: 10px;
-  display: inline-block;
-  height: $card-size;
-  width: $card-size;
-
-}
+$card-size: 200px;
+$font-size: 170px;
 
 .card {
   box-sizing: border-box;
   height: $card-size;
   width: $card-size;
-  font-size: 150px;
+  font-size: $font-size;
   line-height: $card-size;
-  border: 1px solid #333;
+  border: 5px solid #333;
   border-radius: 5px;
   background-color: green;
   overflow: hidden;
   cursor: pointer;
+  margin-bottom: 15px;
 
   &.visible {
     background-color: white;
+    border: 1px solid #333;
     cursor: default;
   }
 

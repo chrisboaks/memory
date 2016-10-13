@@ -24,7 +24,8 @@ body {
 
 #app {
   color: #222;
-  width: 800px;
+  width: 100%;
+  margin: 0 auto;
   font-family: Source Sans Pro, Helvetica, sans-serif;
   text-align: center;
 }

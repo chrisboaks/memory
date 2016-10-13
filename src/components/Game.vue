@@ -32,3 +32,14 @@
     }
   };
 </script>
+
+<style lang="scss">
+.game {
+  margin: 0 auto;
+  min-width: 800px;
+  max-width: 999px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+</style>
